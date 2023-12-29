@@ -17,7 +17,7 @@ async def get_latest_news():
         if story_data and "title" in story_data and "url" in story_data:
             news_item = {
                 "title": story_data["title"],
-                #"image_url": story_data.get("image", "https://example.com/news_image.jpg"),
+                "image_url": story_data.get("image", ""),
                 "description": story_data.get("description", "No Description"),
                 "url": story_data["url"],
             }
@@ -41,23 +41,28 @@ async def send_news():
 
     # Creat rich embed for the news
     for news_item in latest_news:
-        
-        title = news_item.get("title","No title"),
-        description= news_item.get("description"),
-        url = news_item.get("url","No url"),
+        # fix url error 
+        # fix the image url error
+        title = news_item.get("title", "No title")
+        description = news_item.get("description", "No description")
+        url = news_item.get("url", "No url")
+        image_url = news_item.get("image_url", "No image url")
         color = 0x3498db
-        #image_url = news_item.get("image_url", "https://example.com/news_image.jpg") 
         embed = Embed(
             title=title,
             description=description,
-            url=url,
-            color=0x3498db
+            color=color
         )
-        # Check if there is a real image URL
-        #if "https://" in image_url:
-            #embed.set_thumbnail(url=image_url)
 
-        #embed.set_thumbnail(url = ["image_url"])
+        if url.startswith(("http", "https")):
+            embed.url = url
+
+        if url and ("http://" in url or "https://" in url):
+            embed.set_footer(text=url)
+        else:
+            pass
+        print(f"Image URL: {image_url}")
+        
 
         message = await channel.send(embed=embed) # Post the News on the channel
 
