@@ -50,7 +50,7 @@ async def send_news():
         embed = Embed(
             title=title,
             description=description,
-            #url=url,
+            url=url,
             color=0x3498db
         )
         # Check if there is a real image URL
