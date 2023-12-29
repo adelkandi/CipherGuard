@@ -61,7 +61,7 @@ async def send_news():
             embed.set_footer(text=url)
         else:
             pass
-        print(f"Image URL: {image_url}")
+        print(f"Image URL: {image_url}") # to stacktrace and debug
         
 
         message = await channel.send(embed=embed) # Post the News on the channel
