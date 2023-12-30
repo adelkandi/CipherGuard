@@ -4,6 +4,7 @@ import requests
 #from main import Bot
 import json
 
+
 async def get_latest_news():
     url = "https://hacker-news.firebaseio.com/v0/topstories.json"
     response = requests.get(url)    
