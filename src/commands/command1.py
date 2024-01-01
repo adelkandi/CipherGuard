@@ -8,7 +8,7 @@ import json
 async def get_latest_news():
     url = "https://hacker-news.firebaseio.com/v0/topstories.json"
     response = requests.get(url)    
-    storys_ids = response.json()[:5] 
+    storys_ids = response.json()
     news = ""
     news_items =[] # make a list so we can store title and url of the news 
     for story_id in storys_ids:
@@ -102,3 +102,11 @@ async def latest_news (ctx):
 async def send_news_3H():
     channelID = "1189989133674885322"
     await send_news()
+
+# Next plans :
+    # improve get_latest_news() ,send_news() functions 
+    # add a way to help user input his channel id on terminal then saving the channel id on json file to get access later when the bot reboots
+    # impove commands 
+    # add new ideas if possible 
+    # fix the image errors, improve url embed
+    
