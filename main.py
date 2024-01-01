@@ -29,7 +29,6 @@ async def on_message(message):
     #if message.content.startswith("$HackerNews"):
         #latest_news(ctx)
 
-#Bot.run(DISCORD_TOKEN)
 
 
 
