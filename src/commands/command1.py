@@ -8,7 +8,7 @@ import json
 async def get_latest_news():
     url = "https://hacker-news.firebaseio.com/v0/topstories.json"
     response = requests.get(url)    
-    storys_ids = response.json()
+    storys_ids = response.json()[:3]
     news = ""
     news_items =[] # make a list so we can store title and url of the news 
     for story_id in storys_ids:
