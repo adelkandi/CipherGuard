@@ -31,8 +31,8 @@ async def get_latest_news():
 async def send_news():
     from main import Bot
     await Bot.wait_until_ready() # to fix Runtime error loop with main Bot.run
-    #channelId = int(input("Give us the ChannelId where you want the bot to work: "))
-    #print("The bot {0.user}".format(Bot),f" will work on channelID {channelId}")
+    channelId = int(input("Give us the ChannelId where you want the bot to work: "))
+    print("The bot {0.user}".format(Bot),f" will work on channelID {channelId}")
     # ChannelID for my server is: 1189989133674885322 
     channelID = 1189989133674885322
     channel = Bot.get_channel(channelID)
@@ -102,3 +102,6 @@ async def latest_news (ctx):
 async def send_news_3H():
     channelID = "1189989133674885322"
     await send_news()
+
+
+# The channel input() works fine : update the main braansh with it 
