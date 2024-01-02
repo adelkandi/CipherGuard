@@ -12,13 +12,13 @@ intents = discord.Intents.default()
 intents.message_content = True
 #Bot = discord.Client(intents=intents)   # Connect the bot to discord server
 Bot = commands.Bot(command_prefix='$HackerNews',intents=intents)
+
+
 @Bot.event
 async def on_ready():
     print("we have logged in as {0.user}".format(Bot))
     send_news_3H.start()
     
-
-
 
 @Bot.event
 async def on_message(message):
