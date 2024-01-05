@@ -38,7 +38,7 @@ async def send_news():
     channel = Bot.get_channel(channelID)
     # Fetch to the letest news
     latest_news = await get_latest_news() 
-
+    
     # Creat rich embed for the news
     for news_item in latest_news:
         # fix url error 
@@ -99,7 +99,6 @@ async def latest_news (ctx):
 @tasks.loop(minutes = 5) # just test
 
 async def send_news_3H():
-    channelID = "1189989133674885322"
     await send_news()
 
 # Next plans :
