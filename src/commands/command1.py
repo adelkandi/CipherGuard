@@ -1,7 +1,6 @@
 from discord.ext import commands, tasks
 from discord import Embed
 import requests
-#from main import Bot
 import json
 
 
@@ -38,7 +37,7 @@ async def send_news():
     channel = Bot.get_channel(channelID)
     # Fetch to the letest news
     latest_news = await get_latest_news() 
-    
+
     # Creat rich embed for the news
     for news_item in latest_news:
         # fix url error 
