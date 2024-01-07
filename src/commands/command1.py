@@ -1,7 +1,7 @@
 from discord.ext import commands, tasks
 from discord import Embed
 import requests
-#from main import Bot
+
 import json
 
 
@@ -26,16 +26,31 @@ async def get_latest_news():
 
     return news_items
 
-
+# Function checkChannelID:
+#def checkChannelID():
+    return
 
 async def send_news():
     from main import Bot
     await Bot.wait_until_ready() # to fix Runtime error loop with main Bot.run
-    channelId = int(input("Give us the ChannelId where you want the bot to work: "))
-    print("The bot {0.user}".format(Bot),f" will work on channelID {channelId}")
+    # check and save the channelid on json file:
+    
+    with open("conf.json",'r') as file:
+        jsChannel = json.load(file)
+    if "ChannelID" in jsChannel:
+        if jsChannel["ChannelID"] == 0:
+            ChannelID = int(input("Give us the ChannelId where you want the bot to work: "))
+            with open("conf.json","w"):
+                jsChannel["ChannelID"] = ChannelID
+                json.dump(jsChannel,file)
+                
+        else :
+            ChannelID = jsChannel["ChannelID"]
+
+    print("The bot {0.user}".format(Bot),f" will work on channelID {ChannelID}")
     # ChannelID for my server is: 1189989133674885322 
-    channelID = 1189989133674885322
-    channel = Bot.get_channel(channelID)
+    ChannelID = 1189989133674885322
+    channel = Bot.get_channel(ChannelID)
     
     # Fetch to the letest news
     latest_news = await get_latest_news() 
@@ -100,7 +115,7 @@ async def latest_news (ctx):
 @tasks.loop(minutes = 5) # just test
 
 async def send_news_3H():
-    channelID = "1189989133674885322"
+    #channelID = "1189989133674885322"
     await send_news()
 
 
