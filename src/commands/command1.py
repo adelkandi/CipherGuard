@@ -34,7 +34,7 @@ async def send_news():
     from main import Bot
     await Bot.wait_until_ready() # to fix Runtime error loop with main Bot.run
     # check and save the channelid on json file:
-    
+    print(f"Welcome to CipherGuard")
     with open("conf.json",'r') as file:
         jsChannel = json.load(file)
     if "ChannelID" in jsChannel:
@@ -103,7 +103,7 @@ async def latest_news (ctx):
         color = 0x3498db
     )
         embed.set_thumbnail(url = latest_news["image_url"])
-    
+
 
         message = await ctx.send(embed=embed) # Post the News on the channel
 
@@ -119,4 +119,4 @@ async def send_news_3H():
     await send_news()
 
 
-# The channel input() works fine : update the main braansh with it 
+# The channel input() works fine : update the main bransh with it 
