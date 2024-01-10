@@ -1,7 +1,6 @@
 from discord.ext import commands, tasks
 from discord import Embed
 import requests
-
 import json
 
 
@@ -28,17 +27,18 @@ async def get_latest_news():
 
 # Function checkChannelID:
 #def checkChannelID():
-    return
 
 async def send_news():
     from main import Bot
     await Bot.wait_until_ready() # to fix Runtime error loop with main Bot.run
     # check and save the channelid on json file:
     print(f"Welcome to CipherGuard")
-    with open("conf.json",'r') as file:
-        jsChannel = json.load(file)
-    if "ChannelID" in jsChannel:
-        if jsChannel["ChannelID"] == 0:
+
+    # Fix later the config.json file erruer 
+    try:
+        with open("conf.json",'r') as file:
+            jsChannel = json.load(file)
+        if "ChannelID" not in jsChannel or jsChannel["ChannelID"] == 0:
             ChannelID = int(input("Give us the ChannelId where you want the bot to work: "))
             with open("conf.json","w"):
                 jsChannel["ChannelID"] = ChannelID
@@ -46,10 +46,21 @@ async def send_news():
                 
         else :
             ChannelID = jsChannel["ChannelID"]
+    
+        print("The bot {0.user}".format(Bot),f" will work on channelID {ChannelID}")
+    except Exception as erreur:
+        print(f"Erreur loading/saving ChannelID:{erreur}")
+        with open("conf.json", "w") as file:
+            ChannelID = int(input("Give us the ChannelId where you want the bot to work: "))
+            jsChannel["ChannelID"] = ChannelID
+            json.dump(jsChannel, file)
+    
+    print("The bot {0.user}".format(Bot), f" will work on channelID {ChannelID}")
 
-    print("The bot {0.user}".format(Bot),f" will work on channelID {ChannelID}")
+
+    
     # ChannelID for my server is: 1189989133674885322 
-    ChannelID = 1189989133674885322
+    #ChannelID = 1189989133674885322
     channel = Bot.get_channel(ChannelID)
     
     # Fetch to the letest news
